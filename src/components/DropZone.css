@@ -1,0 +1,14 @@
+.drop-zone {
+    height: calc(var(--size)*1.5);
+}
+
+.drop-zone div{
+    width: var(--size);
+    height:var(--size);
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+}
+
+.drop-zone .p1 {background-color: var(--p1);}
+.drop-zone .p2 {background-color: var(--p2);}
