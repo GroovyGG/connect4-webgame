@@ -1,16 +1,17 @@
-.board{
+.board {
     display: grid;
-    grid-template-rows: repeat(6,var(--size));
-    grid-template-columns: repeat(7,var(--size));
+    grid-template-rows: repeat(6, var(--size));
+    grid-template-columns: repeat(7, var(--size));
     position: relative;
 }
-.board div{
+
+.board div {
     background: url('./clip.svg');
 }
 
 .tile {
-    width: 100px;
-    height: 100px;
+    width: var(--size);
+    height: var(--size);
     display: inline-block;
     border: 1px solid #ccc;
 }
