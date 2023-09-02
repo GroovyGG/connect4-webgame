@@ -1,18 +1,19 @@
+import React, { useState } from 'react';
 import './App.css';
 import Board from './components/Board';
 import DropZone from './components/DropZone';
-import ActiveCoin from './components/ActiveCoin';
+import Banner from './components/Banner';
 
 function App() {
+  const [turn, setTurn] = useState(1);
 
   return (
     <div className="App"> 
-      <DropZone/>
-      <Board/>
+      <Banner turn={turn} />
+      <DropZone turn={turn} setTurn={setTurn}/>
+      <Board turn={turn} setTurn={setTurn}/>
     </div>
   );
 }
-
-
 
 export default App;

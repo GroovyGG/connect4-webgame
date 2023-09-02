@@ -1,5 +1,5 @@
 .drop-zone {
-    height: calc(var(--size)*1.5);
+    height: calc(var(--size)*2);
 }
 
 .drop-zone div{
@@ -8,6 +8,7 @@
     display: inline-block;
     position: absolute;
     background-position: center;
+    border-top: 50px solid white;
 }
 
 /* Styles all div elements inside the drop-zone. 

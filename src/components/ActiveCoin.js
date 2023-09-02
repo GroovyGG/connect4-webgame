@@ -17,7 +17,10 @@ const ActiveCoin = ({turn, dropped, setDropped, setTurn}) => {
                     ...dropped,
                     {x : len, y: col, player: turn, status: 'dropped'} // change 'dropping' to 'dropped'
                 ]);
-                setTurn(turn === 1 ? 2 : 1);
+                const newTurn = turn === 1 ? 2 : 1;
+                setTurn(newTurn);
+                localStorage.setItem('turn', newTurn);
+                //setTurn(turn === 1 ? 2 : 1);
             }, 500);
         }
     }
