@@ -3,18 +3,61 @@
 }
 
 .drop-zone div{
-    width: var(--size);
-    height:var(--size);
-    border-radius: 50%;
+    width: calc(var(--size)*1.0);
+    height:calc(var(--size)*1.0);
     display: inline-block;
     position: absolute;
+    background-position: center;
 }
 
-.drop-zone .p1 {background-color: var(--p1);}
-.drop-zone .p2 {background-color: var(--p2);}
+/* Styles all div elements inside the drop-zone. 
+   Sets their width and height to the size variable, 
+   makes them circular with border-radius, 
+   sets them to display inline and positions them absolutely. */
+
+.drop-zone .p1 {
+    background-image: url('./red1.svg');
+    background-size: cover;
+}
+/* Styles all elements with class p1 inside the drop-zone. 
+   Sets their background image to a red SVG and makes the image cover the entire element. */
+
+.drop-zone .p2 {
+    background-image: url('./yellow1.svg');
+    background-size: cover;
+}
+/* Styles all elements with class p2 inside the drop-zone. 
+   Sets their background image to a yellow SVG and makes the image cover the entire element. */
+
+.drop-zone .p1.dropping {
+    background-image: url('./red-arrow.svg');
+    background-size: cover;
+}
+
+.drop-zone .p1.dropped {
+    background-image: url('./red.svg');
+    background-size: cover;
+}
+
+.drop-zone .p2.dropping {
+    background-image: url('./yellow-arrow.svg');
+    background-size: cover;
+}
+
+.drop-zone .p2.dropped {
+    background-image: url('./yellow.svg');
+    background-size: cover;
+}
+
+
+
 .drop-zone .active {
     transition: all ease-in-out 500ms;
 }
+/* Styles all elements with class active inside the drop-zone. 
+   Applies a transition to all properties of the element, 
+   with an ease-in-out timing function and a 500ms duration. */
+
 .drop-zone .active.column-0 {margin-left: 0px;}
 .drop-zone .active.column-1 {margin-left: 100px;}
 .drop-zone .active.column-2 {margin-left: 200px;}
@@ -22,6 +65,8 @@
 .drop-zone .active.column-4 {margin-left: 400px;}
 .drop-zone .active.column-5 {margin-left: 500px;}
 .drop-zone .active.column-6 {margin-left: 600px;}
+/* Sets the margin-left of active elements in each column, 
+   effectively positioning them in the correct column. */
 
 .drop-zone .active.row-0 {transform : translateY(150px)}
 .drop-zone .active.row-1 {transform : translateY(250px)}
@@ -29,5 +74,10 @@
 .drop-zone .active.row-3 {transform : translateY(450px)}
 .drop-zone .active.row-4 {transform : translateY(550px)}
 .drop-zone .active.row-5 {transform : translateY(650px)}
+/* Translates active elements vertically down the board based on their row. 
+   This moves the active coin from the top of the column to the correct row. */
 
 .drop-zone .active.column--.row--{transition: none;}
+/* Removes the transition for elements with both class column-- and class row--. 
+   This selector probably doesn't match any elements in your HTML, 
+   because class names with two dashes are not commonly used. */

@@ -7,3 +7,10 @@
 .board div{
     background: url('./clip.svg');
 }
+
+.tile {
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+    border: 1px solid #ccc;
+}

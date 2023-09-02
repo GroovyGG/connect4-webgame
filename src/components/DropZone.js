@@ -68,17 +68,40 @@ const DropZone = () => {
         })
     }
     useEffect(() => {
+        if (dropped.length === rows * cols) setWinner(-1);
+        findWinner();
+    
+        if (dropped.length > 0) {
+            const lastDropped = dropped[dropped.length - 1];
+            if (lastDropped.status === 'dropping') {
+                setDropped(dropped.slice(0, -1).concat({ ...lastDropped, status: 'dropped' }));
+            }
+        }
+    }, [dropped.length]);
+    
+    // Inside your DropZone component
+
+    useEffect(() => {
         if(dropped.length === rows*cols)
             setWinner(-1)
 
-       findWinner()
+        findWinner()
 
-    },[dropped.length])
+        // Update the status of the last dropped coin from 'dropping' to 'dropped'
+        if (dropped.length > 0) {
+            const lastDropped = dropped[dropped.length - 1];
+            if (lastDropped.status === 'dropping') {
+                setDropped(dropped.slice(0, -1).concat({ ...lastDropped, status: 'dropped' }));
+            }
+        }
+
+},[dropped.length])
+
 
     return <div className="drop-zone">
         {dropped.map((m,i) => 
             <div key={i} 
-                className={`p${m.player}`}
+                className={`p${m.player} ${m.status}`}
                 style={{transform:`translate(${m.y*size}px,${m.x*(size)+150}px)`}}>
             </div>
         )}
@@ -87,7 +110,9 @@ const DropZone = () => {
             ?   <Winner winner={winner} reset={reset}/>
             :   <ActiveCoin dropped={dropped} turn={turn} setDropped={setDropped} setTurn={setTurn} />
         }
-    </div>     
+    </div>    
+    
+    
 }
 
 export default DropZone

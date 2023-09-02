@@ -1,50 +1,47 @@
 import { useEffect, useState } from "react";
 
-const ActiveCoin = ({turn,dropped,setDropped,setTurn}) => {
+const ActiveCoin = ({turn, dropped, setDropped, setTurn}) => {
 
-    const [column, setColumn] = useState(0);
-    const [row,setRow] = useState()
+    const [column, setColumn] = useState(0); 
+    const [row, setRow] = useState()
 
-    const handleKeyDown = e => {
-        if(e.keyCode === 37 && column > 0 ){
-            setColumn(column-1)
+    const handleColumnClick = (col) => {
+        if (dropped.find(drop => drop.x === 0 && drop.y === col)){
+            return;
         }
-        else if(e.keyCode === 39){
-            if (column === undefined)
-                setColumn(1)
-            else if (column < 6)
-                setColumn(column+1)
-        }
-        else if(e.keyCode === 32 || e.keyCode === 13){
-            if (dropped.find(drop => drop.x === 0 && drop.y === (column || 0))){
-                return
-            }
-            else {
-                const len = 5 - dropped.filter(drop => drop.y === (column || 0)).length
-                setRow(len)
-                setTimeout(() => {
-                    setDropped([
-                        ...dropped,
-                        {x : len || 0, y:column || 0, player: turn}
-                    ])
-                    setTurn(turn === 1 ? 2 : 1)
-                },500)
-            }
+        else {
+            const len = 5 - dropped.filter(drop => drop.y === col).length;
+            setRow(len);
+            setTimeout(() => {
+                setDropped([
+                    ...dropped,
+                    {x : len, y: col, player: turn, status: 'dropped'} // change 'dropping' to 'dropped'
+                ]);
+                setTurn(turn === 1 ? 2 : 1);
+            }, 500);
         }
     }
 
     useEffect(() => {
-        setColumn()
-        setRow()
-    },[turn])
+        setColumn();
+        setRow();
+    }, [turn])
 
-    useEffect(() => {
-        document.addEventListener("keyup", handleKeyDown, false);
-        return () => document.removeEventListener("keyup", handleKeyDown);
-    })    
+    const columns = [0, 1, 2, 3, 4, 5, 6];
 
-    //return <div className={`active p${turn} column-${column||'-'} row-${row===undefined ? '-' : row}`} />
-    return <div className={`active p${turn} column-${column}`} />
+    return (
+        <div className="board">
+            {columns.map(col => (
+                <div 
+                key={col} 
+                className={`active p${turn} column-${col} dropping`} 
+                onClick={() => handleColumnClick(col)}
+                >
+                </div>
+            
+            ))}
+        </div>
+    );
 }
 
-export default ActiveCoin
+export default ActiveCoin;
